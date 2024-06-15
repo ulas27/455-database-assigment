@@ -1,76 +1,80 @@
 CREATE TABLE Cost(
-Cost_ID INT PRIMARY KEY,
-Quantity INT,
-Price_per_person INT,
-Total_Price INT
+    Cost_ID VARCHAR(10) PRIMARY KEY,
+    Quantity INT,
+    Price_per_person INT,
+    Total_Price INT
 );
 
 CREATE TABLE Passenger(
-Passenger_ID INT PRIMARY KEY,
-Passenger_Name VARCHAR(30),
-Order_ID INT,
-FOREIGN KEY (Order_ID) REFERENCES Cost(Cost_ID)
+    Passenger_ID VARCHAR(10) PRIMARY KEY,
+    Passenger_Name VARCHAR(30),
+    Order_ID VARCHAR(10),
+    FOREIGN KEY (Order_ID) REFERENCES Cost(Cost_ID)
 );
 
-
 CREATE TABLE Ship(
-Cruise_No INT PRIMARY KEY,
-Cabin_No INT,
-Cruise_Name VARCHAR(35),
-Port VARCHAR(35),
-Ship_ID INT,
-FOREIGN KEY (Ship_ID) REFERENCES Passenger(Passenger_ID)
+    Cruise_No VARCHAR(10) PRIMARY KEY,
+    Cabin_No INT,
+    Cruise_Name VARCHAR(35),
+    Port VARCHAR(35),
+    Ship_ID VARCHAR(10),
+    FOREIGN KEY (Ship_ID) REFERENCES Passenger(Passenger_ID)
 );
 
 CREATE TABLE Excursion(
-Excursion_No varchar(15) PRIMARY KEY,
-Excursion_Leader varchar(20),
-Excursion_Leader_ID varchar(15),
-Excursion_name varchar(30),
-Trip_ID varchar(15),
-FOREIGN KEY (Trip_ID) REFERENCES Ship(Cruise_No)
+    Excursion_No VARCHAR(15) PRIMARY KEY,
+    Excursion_Leader VARCHAR(20),
+    Excursion_Leader_ID VARCHAR(10),
+    Excursion_name VARCHAR(30),
+    Trip_ID VARCHAR(10),
+    FOREIGN KEY (Trip_ID) REFERENCES Ship (Cruise_No)
 );
 
+
+-- Insert into Cost table
+INSERT INTO Cost (Cost_ID, Quantity, Price_per_person, Total_Price) VALUES
+('CO23_1', 5, 200, 1000),
+('CO23_2', 2, 150, 300),
+('CO23_3', 1, 300, 300),
+('CO23_4', 3, 100, 300),
+('CO32_1', 4, 50, 200),
+('CO32_2', 10, 75, 750),
+('CO32_3', 5, 100, 500),
+('CO01_1', 3, 150, 450),
+('CO01_2', 2, 300, 600);
+
+-- Insert into Passenger table
+INSERT INTO Passenger (Passenger_ID, Passenger_Name, Order_ID) VALUES
+('P001_1', 'Weber', 'CO23_1'),
+('P001_2', 'Weber', 'CO23_2'),
+('P001_3', 'Weber', 'CO23_3'),
+('P001_4', 'Weber', 'CO23_4'),
+('P005_1', 'Elshaw', 'CO32_1'),
+('P005_2', 'Elshaw', 'CO32_2'),
+('P005_3', 'Elshaw', 'CO32_3'),
+('P003_1', 'Brown', 'CO01_1'),
+('P003_2', 'Brown', 'CO01_2');
+
+-- Insert into Ship table
+INSERT INTO Ship (Cruise_No, Cabin_No, Cruise_Name, Port, Ship_ID) VALUES
+('T1012', 2345, 'Baltic Highlights', 'Copenhagen', 'P001_1'),
+('T0013', 2345, 'Baltic Highlights', 'Copenhagen', 'P001_2'),
+('T0022_1', 2345, 'Baltic Highlights', 'Oslo', 'P001_3'),
+('T0032', 2345, 'Baltic Highlights', 'St Petersburg', 'P001_4'),
+('T0021', 3777, 'Fjords', 'Bergen', 'P005_1'),
+('T0022_2', 3777, 'Fjords', 'Bergen', 'P005_2'),
+('T0023', 3777, 'Fjords', 'Holden', 'P005_3'),
+('T0031', 8124, 'Baltic Highlights', 'Oslo', 'P003_1'),
+('T0033', 8124, 'Baltic Highlights', 'St Petersburg', 'P003_2');
+
+-- Insert into Excursion table
 INSERT INTO Excursion (Excursion_Leader_ID, Excursion_Leader, Excursion_No, Excursion_name, Trip_ID) VALUES
-('E0001', 'Wermter', 'C001', 'Little Mermaid', 'T1012'),
-('E0001', 'Wermter', 'C001', 'Little Mermaid', 'T0013'),
-('E0002', 'Smith', 'O002', 'Museums', 'T0022'),
-('E1008', 'Jones', 'P002', 'Palaces', 'T0032'),
-('E0070', 'Malone', 'B001', 'Biking', 'T0021'),
-('E0070', 'Malone', 'B111', 'Hiking', 'T0022'),
-('E0101', 'Ham', 'H002', 'Puffins', 'T0031'),
-('E0002', 'Smith', 'O002', 'Museums', 'T0023'),
-('E1008', 'Jones', 'P002', 'Palaces', 'T0033');
-
-INSERT INTO Ship (ShipID, Cabin_No, Cruise_No, Cruise_Name, Port) VALUES
-('S001', 2345, 1012, 'Baltic Highlights', 'Copenhagen'),
-('S001', 2345, 1012, 'Baltic Highlights', 'Copenhagen'),
-('S001', 2345, 1012, 'Baltic Highlights', 'Oslo'),
-('S001', 2345, 1012, 'Baltic Highlights', 'St Petersburg'),
-('S005', 3777, 2121, 'Fjords', 'Bergen'),
-('S005', 3777, 2121, 'Fjords', 'Bergen'),
-('S005', 3777, 2121, 'Fjords', 'Holden'),
-('S003', 8124, 1012, 'Baltic Highlights', 'Oslo'),
-('S003', 8124, 1012, 'Baltic Highlights', 'St Petersburg');
-
-INSERT INTO Passenger (OrderID, PassengerID, PassengerName) VALUES
-('O23', 'P001', 'Weber'),
-('O23', 'P001', 'Weber'),
-('O23', 'P001', 'Weber'),
-('O23', 'P001', 'Weber'),
-('O32', 'P005', 'Elshaw'),
-('O32', 'P005', 'Elshaw'),
-('O32', 'P005', 'Elshaw'),
-('O01', 'P003', 'Brown'),
-('O01', 'P003', 'Brown');
-
-INSERT INTO Cost (Quantity, Price_per_person, Total_Price, Cost_ID) VALUES
-(5, 200, 1000, 'CO23', 5),
-(2, 150, 300, 'CO23', 2),
-(1, 300, 300, 'CO23', 1),
-(3, 100, 300, 'CO23', 3),
-(4, 50, 200, 'CO32', 4),
-(10, 75, 750, 'CO32', 10),
-(5, 100, 500, 'CO32', 5),
-(3, 150, 450, 'CO01', 3),
-(2, 300, 600, 'CO01', 2);
+('E0001_1', 'Wermter', 'C001_1', 'Little Mermaid', 'T1012'),
+('E0001_2', 'Wermter', 'C001_2', 'Little Mermaid', 'T0013'),
+('E0002_1', 'Smith', 'O002_1', 'Museums', 'T0022_1'),
+('E1008_1', 'Jones', 'P002_1', 'Palaces', 'T0032'),
+('E0070_1', 'Malone', 'B001', 'Biking', 'T0021'),
+('E0070_2', 'Malone', 'B111', 'Hiking', 'T0022_2'),
+('E0101_1', 'Ham', 'H002', 'Puffins', 'T0031'),
+('E0002_2', 'Smith', 'O002_2', 'Museums', 'T0023'),
+('E1008_2', 'Jones', 'P002_2', 'Palaces', 'T0033');
