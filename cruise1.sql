@@ -31,7 +31,7 @@ Trip_ID INT,
 FOREIGN KEY (Trip_ID) REFERENCES Ship(Cruise_No)
 );
 
-INSERT INTO Excursion (Excursion_No, Excursion_Leader, Excursion_Leader_ID, Excursion_Name, Trip_ID) VALUES
+INSERT INTO Excursion (Excursion_Leader_ID, Excursion_Leader, Excursion_No, Excursion_name, Trip_ID) VALUES
 ('E0001', 'Wermter', 'C001', 'Little Mermaid', 'T1012'),
 ('E0001', 'Wermter', 'C001', 'Little Mermaid', 'T0013'),
 ('E0002', 'Smith', 'O002', 'Museums', 'T0022'),
@@ -52,3 +52,25 @@ INSERT INTO Ship (ShipID, Cabin_No, Cruise_No, Cruise_Name, Port) VALUES
 ('S005', 3777, 2121, 'Fjords', 'Holden'),
 ('S003', 8124, 1012, 'Baltic Highlights', 'Oslo'),
 ('S003', 8124, 1012, 'Baltic Highlights', 'St Petersburg');
+
+INSERT INTO Passenger (OrderID, PassengerID, PassengerName) VALUES
+('O23', 'P001', 'Weber'),
+('O23', 'P001', 'Weber'),
+('O23', 'P001', 'Weber'),
+('O23', 'P001', 'Weber'),
+('O32', 'P005', 'Elshaw'),
+('O32', 'P005', 'Elshaw'),
+('O32', 'P005', 'Elshaw'),
+('O01', 'P003', 'Brown'),
+('O01', 'P003', 'Brown');
+
+INSERT INTO Cost (Quantity, Price_per_person, Total_Price, Cost_ID) VALUES
+(5, 200, 1000, 'CO23', 5),
+(2, 150, 300, 'CO23', 2),
+(1, 300, 300, 'CO23', 1),
+(3, 100, 300, 'CO23', 3),
+(4, 50, 200, 'CO32', 4),
+(10, 75, 750, 'CO32', 10),
+(5, 100, 500, 'CO32', 5),
+(3, 150, 450, 'CO01', 3),
+(2, 300, 600, 'CO01', 2);
