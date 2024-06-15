@@ -23,11 +23,11 @@ FOREIGN KEY (Ship_ID) REFERENCES Passenger(Passenger_ID)
 );
 
 CREATE TABLE Excursion(
-Excursion_No INT PRIMARY KEY,
+Excursion_No varchar(15) PRIMARY KEY,
 Excursion_Leader varchar(20),
 Excursion_Leader_ID varchar(15),
 Excursion_name varchar(30),
-Trip_ID INT,
+Trip_ID varchar(15),
 FOREIGN KEY (Trip_ID) REFERENCES Ship(Cruise_No)
 );
 
