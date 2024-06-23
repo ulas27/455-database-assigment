@@ -1,34 +1,46 @@
-CREATE TABLE Cost(
-    Cost_ID VARCHAR(10) PRIMARY KEY,
+CREATE TABLE Passenger (
+    PassengerID INT PRIMARY KEY,
+    PassengerName VARCHAR(30)
+);
+
+CREATE TABLE Cruise (
+    CruiseNo INT PRIMARY KEY,
+    CruiseName VARCHAR(35)
+);
+
+CREATE TABLE Orders (
+    OrderID INT PRIMARY KEY,
+    PassengerID INT,
+    Cabin INT,
+    CruiseNo INT,
+    FOREIGN KEY (PassengerID) REFERENCES Passenger(PassengerID),
+    FOREIGN KEY (CruiseNo) REFERENCES Cruise(CruiseNo)
+);
+
+CREATE TABLE OrderCost (
+    OrderID INT,
+    ExcursionNo INT,
     Quantity INT,
-    Price_per_person INT,
-    Total_Price INT
+    TotalCost INT,
+    PRIMARY KEY (OrderID, ExcursionNo),
+    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
+    FOREIGN KEY (ExcursionNo) REFERENCES Excursion(ExcursionNo)
 );
 
-CREATE TABLE Passenger(
-    Passenger_ID VARCHAR(10) PRIMARY KEY,
-    Passenger_Name VARCHAR(30),
-    Order_ID VARCHAR(10),
-    FOREIGN KEY (Order_ID) REFERENCES Cost(Cost_ID)
-);
-
-CREATE TABLE Ship(
-    Cruise_No VARCHAR(10) PRIMARY KEY,
-    Cabin_No INT,
-    Cruise_Name VARCHAR(35),
+CREATE TABLE Excursion (
+    ExcursionNo INT PRIMARY KEY,
+    ExcursionName VARCHAR(35),
     Port VARCHAR(35),
-    Ship_ID VARCHAR(10),
-    FOREIGN KEY (Ship_ID) REFERENCES Passenger(Passenger_ID)
+    Price INT,
+    ExcursionLeaderID INT,
+    FOREIGN KEY (ExcursionLeaderID) REFERENCES ExcursionLeader(ExcursionLeaderID)
 );
 
-CREATE TABLE Excursion(
-    Excursion_No VARCHAR(15) PRIMARY KEY,
-    Excursion_Leader VARCHAR(20),
-    Excursion_Leader_ID VARCHAR(10),
-    Excursion_name VARCHAR(30),
-    Trip_ID VARCHAR(10),
-    FOREIGN KEY (Trip_ID) REFERENCES Ship (Cruise_No)
+CREATE TABLE ExcursionLeader (
+    ExcursionLeaderID INT PRIMARY KEY,
+    ExcursionLeader VARCHAR(20)
 );
+
 
 
 -- Insert into Cost table
