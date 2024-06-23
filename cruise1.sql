@@ -8,6 +8,20 @@ CREATE TABLE Cruise (
     CruiseName VARCHAR(35)
 );
 
+CREATE TABLE ExcursionLeader (
+    ExcursionLeaderID INT PRIMARY KEY,
+    ExcursionLeader VARCHAR(20)
+);
+
+CREATE TABLE Excursion (
+    ExcursionNo INT PRIMARY KEY,
+    ExcursionName VARCHAR(35),
+    Port VARCHAR(35),
+    Price INT,
+    ExcursionLeaderID INT,
+    FOREIGN KEY (ExcursionLeaderID) REFERENCES ExcursionLeader(ExcursionLeaderID)
+);
+
 CREATE TABLE Orders (
     OrderID INT PRIMARY KEY,
     PassengerID INT,
@@ -27,19 +41,6 @@ CREATE TABLE OrderCost (
     FOREIGN KEY (ExcursionNo) REFERENCES Excursion(ExcursionNo)
 );
 
-CREATE TABLE Excursion (
-    ExcursionNo INT PRIMARY KEY,
-    ExcursionName VARCHAR(35),
-    Port VARCHAR(35),
-    Price INT,
-    ExcursionLeaderID INT,
-    FOREIGN KEY (ExcursionLeaderID) REFERENCES ExcursionLeader(ExcursionLeaderID)
-);
-
-CREATE TABLE ExcursionLeader (
-    ExcursionLeaderID INT PRIMARY KEY,
-    ExcursionLeader VARCHAR(20)
-);
 
 
 
