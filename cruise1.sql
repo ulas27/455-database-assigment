@@ -44,50 +44,63 @@ CREATE TABLE OrderCost (
 
 
 
--- Insert into Cost table
-INSERT INTO Cost (Cost_ID, Quantity, Price_per_person, Total_Price) VALUES
-('CO23_1', 5, 200, 1000),
-('CO23_2', 2, 150, 300),
-('CO23_3', 1, 300, 300),
-('CO23_4', 3, 100, 300),
-('CO32_1', 4, 50, 200),
-('CO32_2', 10, 75, 750),
-('CO32_3', 5, 100, 500),
-('CO01_1', 3, 150, 450),
-('CO01_2', 2, 300, 600);
-
 -- Insert into Passenger table
-INSERT INTO Passenger (Passenger_ID, Passenger_Name, Order_ID) VALUES
-('P001_1', 'Weber', 'CO23_1'),
-('P001_2', 'Weber', 'CO23_2'),
-('P001_3', 'Weber', 'CO23_3'),
-('P001_4', 'Weber', 'CO23_4'),
-('P005_1', 'Elshaw', 'CO32_1'),
-('P005_2', 'Elshaw', 'CO32_2'),
-('P005_3', 'Elshaw', 'CO32_3'),
-('P003_1', 'Brown', 'CO01_1'),
-('P003_2', 'Brown', 'CO01_2');
+INSERT INTO Passenger (PassengerID, PassengerName) VALUES
+(1, 'Weber'),
+(2, 'Elshaw'),
+(3, 'Brown');
 
--- Insert into Ship table
-INSERT INTO Ship (Cruise_No, Cabin_No, Cruise_Name, Port, Ship_ID) VALUES
-('T1012', 2345, 'Baltic Highlights', 'Copenhagen', 'P001_1'),
-('T0013', 2345, 'Baltic Highlights', 'Copenhagen', 'P001_2'),
-('T0022_1', 2345, 'Baltic Highlights', 'Oslo', 'P001_3'),
-('T0032', 2345, 'Baltic Highlights', 'St Petersburg', 'P001_4'),
-('T0021', 3777, 'Fjords', 'Bergen', 'P005_1'),
-('T0022_2', 3777, 'Fjords', 'Bergen', 'P005_2'),
-('T0023', 3777, 'Fjords', 'Holden', 'P005_3'),
-('T0031', 8124, 'Baltic Highlights', 'Oslo', 'P003_1'),
-('T0033', 8124, 'Baltic Highlights', 'St Petersburg', 'P003_2');
+-- Insert into Cruise table
+INSERT INTO Cruise (CruiseNo, CruiseName) VALUES
+(1012, 'Baltic Highlights'),
+(13, 'Baltic Highlights'),
+(22, 'Baltic Highlights'),
+(32, 'Baltic Highlights'),
+(21, 'Fjords'),
+(23, 'Fjords'),
+(31, 'Baltic Highlights'),
+(33, 'Baltic Highlights');
+
+-- Insert into Excursion Leader table
+INSERT INTO ExcursionLeader (ExcursionLeaderID, ExcursionLeader) VALUES
+(1, 'Wermter'),
+(2, 'Smith'),
+(3, 'Jones'),
+(4, 'Malone'),
+(5, 'Ham');
 
 -- Insert into Excursion table
-INSERT INTO Excursion (Excursion_Leader_ID, Excursion_Leader, Excursion_No, Excursion_name, Trip_ID) VALUES
-('E0001_1', 'Wermter', 'C001_1', 'Little Mermaid', 'T1012'),
-('E0001_2', 'Wermter', 'C001_2', 'Little Mermaid', 'T0013'),
-('E0002_1', 'Smith', 'O002_1', 'Museums', 'T0022_1'),
-('E1008_1', 'Jones', 'P002_1', 'Palaces', 'T0032'),
-('E0070_1', 'Malone', 'B001', 'Biking', 'T0021'),
-('E0070_2', 'Malone', 'B111', 'Hiking', 'T0022_2'),
-('E0101_1', 'Ham', 'H002', 'Puffins', 'T0031'),
-('E0002_2', 'Smith', 'O002_2', 'Museums', 'T0023'),
-('E1008_2', 'Jones', 'P002_2', 'Palaces', 'T0033');
+INSERT INTO Excursion (ExcursionNo, ExcursionName, Port, Price, ExcursionLeaderID) VALUES
+(1, 'Little Mermaid', 'Copenhagen', 200, 1),
+(2, 'Little Mermaid', 'Copenhagen', 150, 1),
+(3, 'Museums', 'Oslo', 300, 2),
+(4, 'Palaces', 'St Petersburg', 100, 3),
+(5, 'Biking', 'Bergen', 50, 4),
+(6, 'Hiking', 'Bergen', 75, 4),
+(7, 'Puffins', 'Oslo', 100, 5),
+(8, 'Museums', 'Holden', 150, 2),
+(9, 'Palaces', 'St Petersburg', 300, 3);
+
+-- Insert into Orders table
+INSERT INTO Orders (OrderID, PassengerID, Cabin, CruiseNo) VALUES
+(1, 1, 2345, 1012),
+(2, 1, 2345, 13),
+(3, 1, 2345, 22),
+(4, 1, 2345, 32),
+(5, 2, 3777, 21),
+(6, 2, 3777, 23),
+(7, 2, 3777, 23),
+(8, 3, 8124, 31),
+(9, 3, 8124, 33);
+
+-- Insert into Order Cost table
+INSERT INTO OrderCost (OrderID, ExcursionNo, Quantity, TotalCost) VALUES
+(1, 1, 5, 1000),
+(2, 2, 2, 300),
+(3, 3, 1, 300),
+(4, 4, 3, 300),
+(5, 5, 4, 200),
+(6, 6, 10, 750),
+(7, 7, 5, 500),
+(8, 8, 3, 450),
+(9, 9, 2, 600);
